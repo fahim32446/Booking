@@ -23,5 +23,53 @@ class AuthModel extends abstract_models_1.default {
             return user;
         });
     }
+    checkExistingEmail(email) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const [result] = yield this.query()
+                .select('user_id', 'email')
+                .from('users')
+                .where({ email: email });
+            return result;
+        });
+    }
+    signUp(userInfo) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const [id] = yield this.query().insert(userInfo).into('users');
+            return { user_id: id };
+        });
+    }
+    updateToken(user_id, otp, otp_expired) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield this.query()
+                .update({
+                otp: otp,
+                otp_expired: otp_expired,
+            })
+                .into('users')
+                .where({ user_id: user_id });
+            return result;
+        });
+    }
+    getToken(email, user_id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const [result] = yield this.query()
+                .select('otp', 'otp_expired')
+                .from('users')
+                .where({ user_id: user_id })
+                .andWhere({ email: email });
+            return result;
+        });
+    }
+    updatePassword(user_id, password) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield this.query()
+                .update({
+                password: password,
+            })
+                .into('users')
+                .where({ user_id: user_id });
+            return result;
+        });
+    }
 }
 exports.default = AuthModel;

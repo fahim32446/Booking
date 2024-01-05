@@ -6,6 +6,7 @@ import config from './utils/config';
 import ErrorHandler from './common/middlewares/errorHandler';
 import path from 'path';
 import AuthRoute from './route/auth/auth.route';
+import 'dotenv/config';
 
 class App {
   public app = express();

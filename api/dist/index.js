@@ -11,6 +11,7 @@ const config_1 = __importDefault(require("./utils/config"));
 const errorHandler_1 = __importDefault(require("./common/middlewares/errorHandler"));
 const path_1 = __importDefault(require("path"));
 const auth_route_1 = __importDefault(require("./route/auth/auth.route"));
+require("dotenv/config");
 class App {
     // private authChecker = new AuthChecker();
     constructor() {

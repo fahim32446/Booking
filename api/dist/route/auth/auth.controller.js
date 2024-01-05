@@ -21,12 +21,66 @@ class AuthController extends abstract_controllers_1.default {
         this.services = new auth_service_1.default();
         this.validator = new auth_validator_1.default();
         this.login = this.assyncWrapper.wrap(this.validator.login, (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const data = yield this.services.login(req);
+            const data = yield this.services.login(req, res);
             if (data.success) {
                 res.status(200).json(data);
             }
             else {
                 this.error('login error');
+            }
+        }));
+        this.signGoogle = this.assyncWrapper.wrap(this.validator.loginGoogle, (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const data = yield this.services.signGoogle(req, res);
+            if (data.success) {
+                res.status(200).json(data);
+            }
+            else {
+                this.error('login error');
+            }
+        }));
+        this.signUp = this.assyncWrapper.wrap(this.validator.signUp, (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const data = yield this.services.signUp(req, res);
+            if (data.success) {
+                res.status(200).json(data);
+            }
+            else {
+                this.error('Signup error');
+            }
+        }));
+        this.signOut = this.assyncWrapper.wrap(this.validator.signUp, (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const data = yield this.services.signUp(req, res);
+            if (data.success) {
+                res.status(200).json(data);
+            }
+            else {
+                this.error('Sign Out error');
+            }
+        }));
+        this.forgotPassword = this.assyncWrapper.wrap(this.validator.forgotPassword, (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const data = yield this.services.forgotPassword(req, res);
+            if (data.success) {
+                res.status(200).json(data);
+            }
+            else {
+                this.error('Sign Out error');
+            }
+        }));
+        this.verifyOTP = this.assyncWrapper.wrap(this.validator.forgotPassword, (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const data = yield this.services.verifyOTP(req, res);
+            if (data.success) {
+                res.status(200).json(data);
+            }
+            else {
+                this.error('Sign Out error');
+            }
+        }));
+        this.resetPassword = this.assyncWrapper.wrap(this.validator.resetPassword, (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const data = yield this.services.resetPassword(req, res);
+            if (data.success) {
+                res.status(200).json(data);
+            }
+            else {
+                this.error('Sign Out error');
             }
         }));
     }

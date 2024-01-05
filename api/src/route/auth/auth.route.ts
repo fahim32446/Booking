@@ -9,7 +9,15 @@ class AuthRoute extends AbstractRouter {
     this.initRouters();
   }
   initRouters() {
-    this.routers.post('/login', this.authController.login);
+    this.routers
+      .post('/login', this.authController.login)
+      .post('/sign-google', this.authController.signGoogle)
+      .post('/sign-up', this.authController.signUp)
+      .post('/forgot-password', this.authController.forgotPassword)
+      .post('/verify-otp', this.authController.verifyOTP)
+      .post('/reset-password', this.authController.resetPassword);
+
+    this.routers.get('/sign-out', this.authController.signOut);
   }
 }
 export default AuthRoute;
