@@ -11,6 +11,7 @@ const config_1 = __importDefault(require("./utils/config"));
 const errorHandler_1 = __importDefault(require("./common/middlewares/errorHandler"));
 const path_1 = __importDefault(require("path"));
 const auth_route_1 = __importDefault(require("./route/auth/auth.route"));
+const cors_1 = __importDefault(require("cors"));
 require("dotenv/config");
 class App {
     // private authChecker = new AuthChecker();
@@ -34,6 +35,7 @@ class App {
         this.app.use((0, morgan_1.default)('dev'));
         this.app.use((0, cookie_parser_1.default)());
         this.app.use(express_1.default.urlencoded({ extended: true }));
+        this.app.use((0, cors_1.default)({ origin: this.Mini.cors(), credentials: true }));
         this.app.use(express_1.default.static(path_1.default.join(__dirname, 'public')));
     }
     initRouters() {

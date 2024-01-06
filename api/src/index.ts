@@ -6,6 +6,7 @@ import config from './utils/config';
 import ErrorHandler from './common/middlewares/errorHandler';
 import path from 'path';
 import AuthRoute from './route/auth/auth.route';
+import cors from 'cors';
 import 'dotenv/config';
 
 class App {
@@ -33,6 +34,8 @@ class App {
     this.app.use(morgan('dev'));
     this.app.use(cookieParser());
     this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(cors({ origin: this.Mini.cors(), credentials: true }));
+
     this.app.use(express.static(path.join(__dirname, 'public')));
   }
 

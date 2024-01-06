@@ -51,7 +51,7 @@ class AuthController extends AbstractController {
   );
 
   public signOut = this.assyncWrapper.wrap(
-    this.validator.signUp,
+    [],
     async (req: Request, res: Response) => {
       const data = await this.services.signUp(req, res);
 

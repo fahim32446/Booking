@@ -3,8 +3,10 @@ import Layout from './layout/Layout';
 import ErrorPage from './pages/Error';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
+import Registration from './pages/auth/Registration';
 
-type Props = {};
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const errorElement = <ErrorPage />;
 
@@ -21,6 +23,10 @@ const browserRouter = createBrowserRouter([
         path: '/',
         element: <Home />,
       },
+      {
+        path: '/register',
+        element: <Registration />,
+      },
 
       // 404
       {
@@ -32,8 +38,13 @@ const browserRouter = createBrowserRouter([
   },
 ]);
 
-const App = (props: Props) => {
-  return <RouterProvider router={browserRouter} />;
+const App = () => {
+  return (
+    <div>
+      <ToastContainer />
+      <RouterProvider router={browserRouter} />
+    </div>
+  );
 };
 
 export default App;
