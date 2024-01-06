@@ -7,6 +7,7 @@ import Registration from './pages/auth/Registration';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SignIn from './pages/auth/Login';
 
 const errorElement = <ErrorPage />;
 
@@ -26,6 +27,11 @@ const browserRouter = createBrowserRouter([
       {
         path: '/register',
         element: <Registration />,
+      },
+
+      {
+        path: '/login',
+        element: <SignIn />,
       },
 
       // 404

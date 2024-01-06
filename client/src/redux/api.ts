@@ -8,6 +8,7 @@ import { RegisterFormData } from '../pages/auth/Registration';
 import { HttpResponse } from '../utils/commonTypes';
 import { user } from '../utils/tags';
 import { UserState } from './slice/user_slice';
+import { SignInFormData } from '../pages/auth/Login';
 
 export interface CustomError {
   status: number;
@@ -48,13 +49,11 @@ export const api = createApi({
       }),
     }),
 
-    login: builder.mutation<
-      HttpResponse<UserState['user']>,
-      { email: string; password: string }
-    >({
-      query: () => ({
+    login: builder.mutation<HttpResponse<UserState['user']>, SignInFormData>({
+      query: (body) => ({
         url: `/auth/login`,
         method: 'POST',
+        body: body,
       }),
     }),
 
