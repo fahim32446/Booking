@@ -1,10 +1,12 @@
-import { useForm } from 'react-hook-form';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useLoginMutation } from '../../redux/api';
 import { useEffect } from 'react';
-import { displayErrorMessage } from '../../utils/ErrorToast';
-import { toast } from 'react-toastify';
+import { useForm } from 'react-hook-form';
 import { VscLoading } from 'react-icons/vsc';
+import { useDispatch } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useLoginMutation } from '../../redux/api';
+import { setUser } from '../../redux/slice/user_slice';
+import { displayErrorMessage } from '../../utils/ErrorToast';
 
 export type SignInFormData = {
   email: string;
@@ -12,10 +14,11 @@ export type SignInFormData = {
 };
 
 const SignIn = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [postLogin, { isLoading, isError, isSuccess, error }] =
+  const [postLogin, { isLoading, isError, isSuccess, error, data: loginInfo }] =
     useLoginMutation();
 
   const {
@@ -32,6 +35,7 @@ const SignIn = () => {
     if (isError) {
       displayErrorMessage(error);
     } else if (isSuccess) {
+      dispatch(setUser(loginInfo?.data || null));
       navigate(location.state?.from?.pathname || '/');
       toast.success('Login successful');
     }

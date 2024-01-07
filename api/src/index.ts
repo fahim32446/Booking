@@ -8,12 +8,13 @@ import path from 'path';
 import AuthRoute from './route/auth/auth.route';
 import cors from 'cors';
 import 'dotenv/config';
+import AuthChecker from './common/middlewares/authChecker';
 
 class App {
   public app = express();
   private port: number = Number(config.DB_PORT);
   private Mini = new Mini();
-  // private authChecker = new AuthChecker();
+  private authChecker = new AuthChecker();
 
   constructor() {
     this.initMiddlewares();

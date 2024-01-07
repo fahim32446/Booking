@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { VscLoading } from 'react-icons/vsc';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useRegistrationMutation } from '../../redux/api';
+import { useAppDispatch } from '../../redux/reduxHooks';
+import { setUser } from '../../redux/slice/user_slice';
 import { displayErrorMessage } from '../../utils/ErrorToast';
 
 export type RegisterFormData = {
@@ -14,7 +17,11 @@ export type RegisterFormData = {
 };
 
 const Registration = () => {
-  const [postData, { isError, isLoading, isSuccess, error }] =
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [postData, { isError, isLoading, isSuccess, error, data }] =
     useRegistrationMutation();
 
   const {
@@ -26,14 +33,15 @@ const Registration = () => {
 
   const onSubmit = handleSubmit((data) => {
     postData(data);
-    console.log(data);
   });
 
   useEffect(() => {
     if (isError) {
       displayErrorMessage(error);
     } else if (isSuccess) {
+      dispatch(setUser(data?.data || null));
       toast.success('Registration successful!');
+      navigate(location.state?.from?.pathname || '/');
     }
   }, [isError, isSuccess]);
 

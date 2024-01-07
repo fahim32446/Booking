@@ -17,6 +17,7 @@ class AuthRoute extends AbstractRouter {
       .post('/verify-otp', this.authController.verifyOTP)
       .post('/reset-password', this.authController.resetPassword);
 
+    this.routers.get('/verify-token', this.authController.signOut);
     this.routers.get('/sign-out', this.authController.signOut);
   }
 }

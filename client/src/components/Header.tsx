@@ -1,10 +1,26 @@
 import { Link } from 'react-router-dom';
+import { useLazySignOutQuery } from '../redux/api';
+import { useAppDispatch, useAppSelector } from '../redux/reduxHooks';
+import { logout } from '../redux/slice/user_slice';
 // import { useAppContext } from "../contexts/AppContext";
 // import SignOutButton from "./SignOutButton";
 
 const Header = () => {
-  // const { isLoggedIn } = useAppContext();
-  const isLoggedIn = true;
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user.user);
+
+  const [signOut, { isSuccess }] = useLazySignOutQuery();
+
+  const handleClick = () => {
+    setTimeout(() => {
+      console.log('GIII');
+    }, 300);
+
+    console.log('HII');
+
+    dispatch(logout());
+    signOut();
+  };
 
   return (
     <div className='bg-blue-800 py-6'>
@@ -13,7 +29,7 @@ const Header = () => {
           <Link to='/'>MernHolidays.com</Link>
         </span>
         <span className='flex space-x-2'>
-          {isLoggedIn ? (
+          {user?.user_id ? (
             <>
               <Link
                 className='flex items-center text-white px-3 font-bold hover:bg-blue-600'
@@ -27,7 +43,12 @@ const Header = () => {
               >
                 My Hotels
               </Link>
-              {/* <SignOutButton /> */}
+              <button
+                onClick={handleClick}
+                className='text-blue-600 px-3 font-bold bg-white hover:bg-gray-100 '
+              >
+                Sign Out
+              </button>
             </>
           ) : (
             <Link

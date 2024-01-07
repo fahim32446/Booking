@@ -23,7 +23,10 @@ export interface CustomError {
 export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_REACT_APP_BASE_URL}/api/v1`,
+    credentials: 'include',
     prepareHeaders: async (headers) => {
+      headers.set('Content-Type', 'application/json');
+      headers.set('Accept', 'application/json');
       //   const token = localStorage.getItem('trabill_ota');
       //   const session_id = localStorage.getItem('__tus');
 
@@ -39,7 +42,7 @@ export const api = createApi({
 
   endpoints: (builder) => ({
     registration: builder.mutation<
-      HttpResponse<{ user_id: number }>,
+      HttpResponse<UserState['user']>,
       RegisterFormData
     >({
       query: (body) => ({
@@ -87,7 +90,7 @@ export const api = createApi({
     signOut: builder.query<HttpResponse<void>, void>({
       query: () => ({
         url: `/auth/sign-out`,
-        method: 'POST',
+        method: 'GET',
       }),
     }),
   }),
@@ -101,5 +104,5 @@ export const {
   useForgotPasswordMutation,
   useVerifyOTPMutation,
   useResetPasswordMutation,
-  useSignOutQuery,
+  useLazySignOutQuery,
 } = api;

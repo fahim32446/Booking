@@ -13,12 +13,13 @@ const path_1 = __importDefault(require("path"));
 const auth_route_1 = __importDefault(require("./route/auth/auth.route"));
 const cors_1 = __importDefault(require("cors"));
 require("dotenv/config");
+const authChecker_1 = __importDefault(require("./common/middlewares/authChecker"));
 class App {
-    // private authChecker = new AuthChecker();
     constructor() {
         this.app = (0, express_1.default)();
         this.port = Number(config_1.default.DB_PORT);
         this.Mini = new mini_1.default();
+        this.authChecker = new authChecker_1.default();
         this.initMiddlewares();
         this.initRouters();
         this.moduleRouters();

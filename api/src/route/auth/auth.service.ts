@@ -130,7 +130,7 @@ class AuthService extends AbstractServices {
 
       const checkAlreadyExist = await auth_conn.checkExistingEmail(email);
 
-      if (checkAlreadyExist.user_id) {
+      if (checkAlreadyExist?.user_id) {
         throw new CustomError('Email already exists', 409, 'Conflict');
       }
 
@@ -153,7 +153,7 @@ class AuthService extends AbstractServices {
         }
       );
 
-      res.cookie(config.COOKIES_NAME, token, {
+      res.cookie('auth_token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         maxAge: 86400000,

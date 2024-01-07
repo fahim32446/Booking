@@ -116,7 +116,7 @@ class AuthService extends abstract_service_1.default {
             return yield this.models.db.transaction((trx) => __awaiter(this, void 0, void 0, function* () {
                 const auth_conn = this.models.authModel(req);
                 const checkAlreadyExist = yield auth_conn.checkExistingEmail(email);
-                if (checkAlreadyExist.user_id) {
+                if (checkAlreadyExist === null || checkAlreadyExist === void 0 ? void 0 : checkAlreadyExist.user_id) {
                     throw new customError_1.default('Email already exists', 409, 'Conflict');
                 }
                 const hashedPassword = yield bcryptjs_1.default.hash(req.body.password, 10);
@@ -130,7 +130,7 @@ class AuthService extends abstract_service_1.default {
                 const token = jsonwebtoken_1.default.sign({ userId: user.user_id }, config_1.default.JWT_SECRET, {
                     expiresIn: '1d',
                 });
-                res.cookie(config_1.default.COOKIES_NAME, token, {
+                res.cookie('auth_token', token, {
                     httpOnly: true,
                     secure: process.env.NODE_ENV === 'production',
                     maxAge: 86400000,

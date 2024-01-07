@@ -48,7 +48,7 @@ class AuthController extends abstract_controllers_1.default {
             }
         }));
         this.signOut = this.assyncWrapper.wrap([], (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const data = yield this.services.signUp(req, res);
+            const data = yield this.services.signOut(req, res);
             if (data.success) {
                 res.status(200).json(data);
             }

@@ -53,7 +53,7 @@ class AuthController extends AbstractController {
   public signOut = this.assyncWrapper.wrap(
     [],
     async (req: Request, res: Response) => {
-      const data = await this.services.signUp(req, res);
+      const data = await this.services.signOut(req, res);
 
       if (data.success) {
         res.status(200).json(data);

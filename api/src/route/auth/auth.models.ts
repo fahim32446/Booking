@@ -28,7 +28,7 @@ class AuthModel extends AbstractModels {
       .select('user_id', 'email')
       .from('users')
       .where({ email: email });
-    return result as { user_id: number; email: string };
+    return result as { user_id?: number; email?: string };
   }
 
   async signUp(userInfo: IRegistration) {
