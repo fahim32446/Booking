@@ -1,9 +1,9 @@
 import { Application } from 'express';
-import AuthRoute from './route/auth/auth.route';
+import HotelRoute from './route/hotel/hotel.route';
 
 const routes = (app: Application) => {
-  //Auth
-  //   app.use('/api/v1/auth', new AuthRoute().routers);
+  //HOTEL ROUTES
+  app.use('/api/v1/hotel', new HotelRoute().routers);
 };
 
 export default routes;

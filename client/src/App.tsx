@@ -8,6 +8,8 @@ import Registration from './pages/auth/Registration';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SignIn from './pages/auth/Login';
+import RequireAuth from './components/RequireAuth';
+import AddHotel from './pages/hotel/page/AddHotel';
 
 const errorElement = <ErrorPage />;
 
@@ -39,6 +41,23 @@ const browserRouter = createBrowserRouter([
         path: '*',
         element: <NotFound />,
         errorElement: errorElement,
+      },
+    ],
+  },
+
+  // Auth Route
+
+  {
+    element: (
+      <RequireAuth>
+        <Layout />
+      </RequireAuth>
+    ),
+    errorElement: errorElement,
+    children: [
+      {
+        path: '/add-hotel',
+        element: <AddHotel />,
       },
     ],
   },

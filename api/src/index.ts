@@ -1,14 +1,15 @@
 import cookieParser from 'cookie-parser';
-import express from 'express';
-import morgan from 'morgan';
-import Mini from './common/mini';
-import config from './utils/config';
-import ErrorHandler from './common/middlewares/errorHandler';
-import path from 'path';
-import AuthRoute from './route/auth/auth.route';
 import cors from 'cors';
 import 'dotenv/config';
+import express from 'express';
+import morgan from 'morgan';
+import path from 'path';
 import AuthChecker from './common/middlewares/authChecker';
+import ErrorHandler from './common/middlewares/errorHandler';
+import Mini from './common/mini';
+import AuthRoute from './route/auth/auth.route';
+import config from './utils/config';
+import routes from './routes';
 
 class App {
   public app = express();
@@ -25,6 +26,7 @@ class App {
   }
 
   public listen() {
+    this.Mini.cloudinary();
     this.app.listen(4000, () => {
       console.log(`server is listening at ${4000}....`);
     });
@@ -52,8 +54,8 @@ class App {
     /**
      * @router {Auth checker}
      */
-    // this.app.use(this.authChecker.check);
-    // routes(this.app);
+    this.app.use(this.authChecker.check);
+    routes(this.app);
   }
 
   private notFoundRouter() {

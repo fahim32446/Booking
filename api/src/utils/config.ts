@@ -13,6 +13,10 @@ interface Config {
   SERVER_PORT: string;
   SENDER_EMAIL: string;
   SENDER_EMAIL_APP_PASS: string;
+
+  CLOUDINARY_CLOUD_NAME: string;
+  CLOUDINARY_API_KEY: string;
+  CLOUDINARY_API_SECRET: string;
 }
 
 const config: Config = {
@@ -25,6 +29,10 @@ const config: Config = {
   SERVER_PORT: process.env.SERVER_PORT || '5000',
   SENDER_EMAIL: process.env.SENDER_EMAIL || '',
   SENDER_EMAIL_APP_PASS: process.env.SENDER_EMAIL_APP_PASS || '',
+
+  CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY || '',
+  CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME || '',
+  CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRCT || '',
 };
 
 export default config;

@@ -4,16 +4,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
-const express_1 = __importDefault(require("express"));
-const morgan_1 = __importDefault(require("morgan"));
-const mini_1 = __importDefault(require("./common/mini"));
-const config_1 = __importDefault(require("./utils/config"));
-const errorHandler_1 = __importDefault(require("./common/middlewares/errorHandler"));
-const path_1 = __importDefault(require("path"));
-const auth_route_1 = __importDefault(require("./route/auth/auth.route"));
 const cors_1 = __importDefault(require("cors"));
 require("dotenv/config");
+const express_1 = __importDefault(require("express"));
+const morgan_1 = __importDefault(require("morgan"));
+const path_1 = __importDefault(require("path"));
 const authChecker_1 = __importDefault(require("./common/middlewares/authChecker"));
+const errorHandler_1 = __importDefault(require("./common/middlewares/errorHandler"));
+const mini_1 = __importDefault(require("./common/mini"));
+const auth_route_1 = __importDefault(require("./route/auth/auth.route"));
+const config_1 = __importDefault(require("./utils/config"));
+const routes_1 = __importDefault(require("./routes"));
 class App {
     constructor() {
         this.app = (0, express_1.default)();
@@ -27,6 +28,7 @@ class App {
         this.errorHandler();
     }
     listen() {
+        this.Mini.cloudinary();
         this.app.listen(4000, () => {
             console.log(`server is listening at ${4000}....`);
         });
@@ -49,8 +51,8 @@ class App {
         /**
          * @router {Auth checker}
          */
-        // this.app.use(this.authChecker.check);
-        // routes(this.app);
+        this.app.use(this.authChecker.check);
+        (0, routes_1.default)(this.app);
     }
     notFoundRouter() {
         this.app.use(this.Mini[404]);

@@ -1,4 +1,6 @@
+import { v2 as cloudinary } from 'cloudinary';
 import { NextFunction, Request, Response } from 'express';
+import config from '../utils/config';
 import CustomError from '../utils/error/customError';
 
 class Mini {
@@ -13,6 +15,14 @@ class Mini {
       'https://localhost:5173',
       'localhost:5173',
     ];
+  }
+
+  public cloudinary() {
+    return cloudinary.config({
+      cloud_name: config.CLOUDINARY_CLOUD_NAME,
+      api_key: config.CLOUDINARY_API_KEY,
+      api_secret: config.CLOUDINARY_API_SECRET,
+    });
   }
 }
 

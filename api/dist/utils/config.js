@@ -16,5 +16,8 @@ const config = {
     SERVER_PORT: process.env.SERVER_PORT || '5000',
     SENDER_EMAIL: process.env.SENDER_EMAIL || '',
     SENDER_EMAIL_APP_PASS: process.env.SENDER_EMAIL_APP_PASS || '',
+    CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY || '',
+    CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME || '',
+    CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRCT || '',
 };
 exports.default = config;
