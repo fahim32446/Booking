@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit/query/react';
 import { RegisterFormData } from '../pages/auth/Registration';
 import { HttpResponse } from '../utils/commonTypes';
-import { user } from '../utils/tags';
+import { hotel, user } from '../utils/tags';
 import { UserState } from './slice/user_slice';
 import { SignInFormData } from '../pages/auth/Login';
 
@@ -25,8 +25,8 @@ export const api = createApi({
     baseUrl: `${import.meta.env.VITE_REACT_APP_BASE_URL}/api/v1`,
     credentials: 'include',
     prepareHeaders: async (headers) => {
-      headers.set('Content-Type', 'application/json');
-      headers.set('Accept', 'application/json');
+      // headers.set('Content-Type', 'application/json');
+      // headers.set('Accept', 'application/json');
       //   const token = localStorage.getItem('trabill_ota');
       //   const session_id = localStorage.getItem('__tus');
 
@@ -95,7 +95,7 @@ export const api = createApi({
     }),
   }),
 
-  tagTypes: [...user],
+  tagTypes: [...user, hotel],
 });
 
 export const {

@@ -35,3 +35,17 @@ export interface IHotelSearchResponse {
     pages: number;
   };
 }
+
+export type HotelData = {
+  user_id: string;
+  name: string;
+  city: string;
+  country: string;
+  description: string;
+  type: string;
+  adult_count: number;
+  child_count: number;
+  price_per_night: number;
+  star_rating: number;
+  image_urls: string;
+};

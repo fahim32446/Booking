@@ -21,14 +21,24 @@ class HotelService extends abstract_service_1.default {
     addHotel(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.models.db.transaction((trx) => __awaiter(this, void 0, void 0, function* () {
-                const auth_conn = this.models.hotelModel(req);
+                const hotel_conn = this.models.hotelModel(req);
                 const imageFiles = req.files;
                 const newHotel = req.body;
                 const imageUrls = yield (0, imageUpload_1.uploadImages)(imageFiles);
                 const data = {
                     user_id: req.userId,
+                    name: newHotel.name,
+                    city: newHotel.city,
+                    country: newHotel.country,
+                    description: newHotel.description,
+                    type: newHotel.type,
+                    adult_count: newHotel.adultCount,
+                    child_count: newHotel.childCount,
+                    price_per_night: newHotel.pricePerNight,
+                    star_rating: newHotel.starRating,
+                    image_urls: JSON.stringify(imageUrls),
                 };
-                const result = yield auth_conn.addHotel(data);
+                const result = yield hotel_conn.addHotel(data);
                 return {
                     success: true,
                     data: result,

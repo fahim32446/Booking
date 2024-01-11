@@ -20,15 +20,14 @@ class HotelRoute extends abstract_routers_1.default {
         this.initRouters();
     }
     initRouters() {
-        this.routers
-            .post('/', upload.array('imageFiles', 6), this.hotelController.addHotel)
-            .post('/sign-google', this.hotelController.signGoogle)
-            .post('/sign-up', this.hotelController.signUp)
-            .post('/forgot-password', this.hotelController.forgotPassword)
-            .post('/verify-otp', this.hotelController.verifyOTP)
-            .post('/reset-password', this.hotelController.resetPassword);
-        this.routers.get('/verify-token', this.hotelController.signOut);
-        this.routers.get('/sign-out', this.hotelController.signOut);
+        this.routers.post('/', upload.array('imageFiles', 6), this.hotelController.addHotel);
+        // .post('/sign-google', this.hotelController.signGoogle)
+        // .post('/sign-up', this.hotelController.signUp)
+        // .post('/forgot-password', this.hotelController.forgotPassword)
+        // .post('/verify-otp', this.hotelController.verifyOTP)
+        // .post('/reset-password', this.hotelController.resetPassword);
+        // this.routers.get('/verify-token', this.hotelController.signOut);
+        // this.routers.get('/sign-out', this.hotelController.signOut);
     }
 }
 exports.default = HotelRoute;

@@ -18,6 +18,6 @@ const config = {
     SENDER_EMAIL_APP_PASS: process.env.SENDER_EMAIL_APP_PASS || '',
     CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY || '',
     CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME || '',
-    CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRCT || '',
+    CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET || '',
 };
 exports.default = config;

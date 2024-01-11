@@ -10,6 +10,7 @@ import Mini from './common/mini';
 import AuthRoute from './route/auth/auth.route';
 import config from './utils/config';
 import routes from './routes';
+import { v2 as cloudinary } from 'cloudinary';
 
 class App {
   public app = express();
@@ -26,13 +27,13 @@ class App {
   }
 
   public listen() {
-    this.Mini.cloudinary();
     this.app.listen(4000, () => {
       console.log(`server is listening at ${4000}....`);
     });
   }
 
   private initMiddlewares() {
+    this.Mini.cloudinary();
     this.app.use(express.json());
     this.app.use(morgan('dev'));
     this.app.use(cookieParser());
@@ -55,6 +56,7 @@ class App {
      * @router {Auth checker}
      */
     this.app.use(this.authChecker.check);
+
     routes(this.app);
   }
 

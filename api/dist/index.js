@@ -28,12 +28,12 @@ class App {
         this.errorHandler();
     }
     listen() {
-        this.Mini.cloudinary();
         this.app.listen(4000, () => {
             console.log(`server is listening at ${4000}....`);
         });
     }
     initMiddlewares() {
+        this.Mini.cloudinary();
         this.app.use(express_1.default.json());
         this.app.use((0, morgan_1.default)('dev'));
         this.app.use((0, cookie_parser_1.default)());
