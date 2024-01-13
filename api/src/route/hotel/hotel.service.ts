@@ -1,13 +1,7 @@
-import bcrypt from 'bcryptjs';
 import { Request, Response } from 'express';
 import AbstractServices from '../../abstract/abstract.service';
-import CustomError from '../../utils/error/customError';
-import { HotelData, IHotelType } from './hotel.type';
-import jwt from 'jsonwebtoken';
-import nodemailer from 'nodemailer';
-import { IDecoded } from '../../common/type';
-import config from '../../utils/config';
 import { uploadImages } from '../../utils/imageUpload';
+import { HotelData, IHotelType } from './hotel.type';
 
 class HotelService extends AbstractServices {
   constructor() {
@@ -34,10 +28,44 @@ class HotelService extends AbstractServices {
         child_count: newHotel.childCount,
         price_per_night: newHotel.pricePerNight,
         star_rating: newHotel.starRating,
+        facilities: JSON.stringify(newHotel.facilities),
         image_urls: JSON.stringify(imageUrls),
       };
 
       const result = await hotel_conn.addHotel(data);
+
+      return {
+        success: true,
+        data: result,
+        message: 'User login successfully done',
+      };
+    });
+  }
+
+  public async getHotels(req: Request) {
+    return await this.models.db.transaction(async (trx) => {
+      const hotel_conn = this.models.hotelModel(req);
+
+      const user_id = req.userId;
+
+      const result = await hotel_conn.getHotels(user_id);
+
+      return {
+        success: true,
+        data: result,
+        message: 'User login successfully done',
+      };
+    });
+  }
+
+  public async getSingleHotel(req: Request) {
+    return await this.models.db.transaction(async (trx) => {
+      const hotelID = req.params.id.toString();
+      const hotel_conn = this.models.hotelModel(req);
+
+      const user_id = req.userId;
+
+      const result = await hotel_conn.getSingleHotel(hotelID);
 
       return {
         success: true,

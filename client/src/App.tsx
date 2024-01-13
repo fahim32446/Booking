@@ -10,6 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import SignIn from './pages/auth/Login';
 import RequireAuth from './components/RequireAuth';
 import AddHotel from './pages/hotel/page/AddHotel';
+import MyHotels from './pages/hotel/page/MyHotels';
+import EditHotel from './pages/hotel/page/EditHotel';
 
 const errorElement = <ErrorPage />;
 
@@ -58,6 +60,16 @@ const browserRouter = createBrowserRouter([
       {
         path: '/add-hotel',
         element: <AddHotel />,
+      },
+
+      {
+        path: '/my-hotels',
+        element: <MyHotels />,
+      },
+
+      {
+        path: `/edit-hotel/:hotelId`,
+        element: <EditHotel />,
       },
     ],
   },

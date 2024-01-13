@@ -36,9 +36,39 @@ class HotelService extends abstract_service_1.default {
                     child_count: newHotel.childCount,
                     price_per_night: newHotel.pricePerNight,
                     star_rating: newHotel.starRating,
+                    facilities: JSON.stringify(newHotel.facilities),
                     image_urls: JSON.stringify(imageUrls),
                 };
                 const result = yield hotel_conn.addHotel(data);
+                return {
+                    success: true,
+                    data: result,
+                    message: 'User login successfully done',
+                };
+            }));
+        });
+    }
+    getHotels(req) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.models.db.transaction((trx) => __awaiter(this, void 0, void 0, function* () {
+                const hotel_conn = this.models.hotelModel(req);
+                const user_id = req.userId;
+                const result = yield hotel_conn.getHotels(user_id);
+                return {
+                    success: true,
+                    data: result,
+                    message: 'User login successfully done',
+                };
+            }));
+        });
+    }
+    getSingleHotel(req) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.models.db.transaction((trx) => __awaiter(this, void 0, void 0, function* () {
+                const hotelID = req.params.id.toString();
+                const hotel_conn = this.models.hotelModel(req);
+                const user_id = req.userId;
+                const result = yield hotel_conn.getSingleHotel(hotelID);
                 return {
                     success: true,
                     data: result,

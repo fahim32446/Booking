@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { api } from '../api';
 
 export interface UserState {
   user: {
@@ -23,6 +24,7 @@ const userSlice = createSlice({
       state.user = action.payload;
     },
     logout: (state) => {
+      api.util.resetApiState();
       state.user = null;
     },
   },

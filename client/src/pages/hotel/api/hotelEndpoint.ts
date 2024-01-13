@@ -1,10 +1,11 @@
 import { api } from '../../../redux/api';
 import { HttpResponse } from '../../../utils/commonTypes';
 import { hotel } from '../../../utils/tags';
+import { HotelType, getHotels } from '../utils/hotelType';
 
 export const hotelEndpoint = api.injectEndpoints({
   endpoints: (build) => ({
-    addHotel: build.mutation<HttpResponse<any[]>, { data: FormData }>({
+    addMyHotel: build.mutation<HttpResponse<void>, { data: FormData }>({
       query: ({ data }) => ({
         url: `/hotel`,
         method: 'POST',
@@ -12,7 +13,27 @@ export const hotelEndpoint = api.injectEndpoints({
       }),
       invalidatesTags: () => [hotel],
     }),
+
+    getMyHotels: build.query<HttpResponse<getHotels[]>, void>({
+      query: () => ({
+        url: `/hotel`,
+        method: 'GET',
+      }),
+      providesTags: () => [hotel],
+    }),
+
+    getMySingleHotel: build.query<HttpResponse<HotelType>, { id: string }>({
+      query: ({ id }) => ({
+        url: `/hotel/${id}`,
+        method: 'GET',
+      }),
+      providesTags: () => [hotel],
+    }),
   }),
 });
 
-export const { useAddHotelMutation } = hotelEndpoint;
+export const {
+  useAddMyHotelMutation,
+  useGetMyHotelsQuery,
+  useGetMySingleHotelQuery,
+} = hotelEndpoint;

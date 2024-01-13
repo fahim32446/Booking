@@ -16,7 +16,7 @@ class AuthChecker {
     const token = req.cookies['auth_token'];
 
     if (!token) {
-      throw new CustomError('Your login is expired', 404, 'No token');
+      next(new CustomError('Your login is expired', 404, 'No token'));
     }
 
     try {
@@ -24,7 +24,7 @@ class AuthChecker {
       req.userId = (decoded as JwtPayload).userId;
       next();
     } catch (error) {
-      throw new CustomError('Your login is expired', 401, 'Unauthorized');
+      next(new CustomError('Your login is expired', 401, 'Unauthorized'));
     }
   };
 }

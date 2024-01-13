@@ -20,7 +20,7 @@ class AuthChecker {
         this.check = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             const token = req.cookies['auth_token'];
             if (!token) {
-                throw new customError_1.default('Your login is expired', 404, 'No token');
+                next(new customError_1.default('Your login is expired', 404, 'No token'));
             }
             try {
                 const decoded = jsonwebtoken_1.default.verify(token, config_1.default.JWT_SECRET);
@@ -28,7 +28,7 @@ class AuthChecker {
                 next();
             }
             catch (error) {
-                throw new customError_1.default('Your login is expired', 401, 'Unauthorized');
+                next(new customError_1.default('Your login is expired', 401, 'Unauthorized'));
             }
         });
     }

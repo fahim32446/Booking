@@ -90,7 +90,7 @@ export const api = createApi({
     signOut: builder.query<HttpResponse<void>, void>({
       query: () => ({
         url: `/auth/sign-out`,
-        method: 'GET',
+        method: 'POST',
       }),
     }),
   }),

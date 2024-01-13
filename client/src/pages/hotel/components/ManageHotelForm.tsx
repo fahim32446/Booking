@@ -18,11 +18,15 @@ const ManageHotelForm = ({ isLoading, onSave, hotel, isSuccess }: Props) => {
   const formMethods = useForm<HotelFormData>();
   const { handleSubmit, reset } = formMethods;
 
+  useEffect(() => {
+    reset(hotel);
+  }, [hotel, reset]);
+
   const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
     const formData = new FormData();
-    // if (hotel) {
-    //   formData.append('hotelId', hotel._id);
-    // }
+    if (hotel) {
+      formData.append('hotelId', hotel.hotelId);
+    }
     formData.append('name', formDataJson.name);
     formData.append('city', formDataJson.city);
     formData.append('country', formDataJson.country);
@@ -50,9 +54,9 @@ const ManageHotelForm = ({ isLoading, onSave, hotel, isSuccess }: Props) => {
     onSave(formData);
   });
 
-  useEffect(() => {
-    if (isSuccess) reset({});
-  }, [isSuccess]);
+  // useEffect(() => {
+  //   if (isSuccess) reset({});
+  // }, [isSuccess]);
 
   return (
     <FormProvider {...formMethods}>

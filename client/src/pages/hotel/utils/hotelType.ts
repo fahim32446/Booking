@@ -14,6 +14,7 @@ export type HotelFormData = {
 };
 
 export type HotelType = {
+  hotelId: string;
   userId: string;
   name: string;
   city: string;
@@ -40,4 +41,20 @@ export type BookingType = {
   checkIn: Date;
   checkOut: Date;
   totalCost: number;
+};
+
+export type getHotels = {
+  hotel_id: string;
+  user_id: string;
+  name: string;
+  city: string;
+  country: string;
+  description: string;
+  type: string;
+  adult_count: string;
+  child_count: string;
+  price_per_night: string;
+  star_rating: string;
+  image_urls: string;
+  last_updated: string;
 };

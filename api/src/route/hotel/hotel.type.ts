@@ -48,4 +48,5 @@ export type HotelData = {
   price_per_night: number;
   star_rating: number;
   image_urls: string;
+  facilities: string;
 };

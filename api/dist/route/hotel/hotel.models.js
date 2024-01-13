@@ -20,5 +20,24 @@ class HotelModel extends abstract_models_1.default {
             return result;
         });
     }
+    getHotels(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield this.query()
+                .select('*')
+                .from('hotels')
+                .where({ user_id: id })
+                .orderBy('last_updated', 'desc');
+            return result;
+        });
+    }
+    getSingleHotel(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const [result] = yield this.query()
+                .select('hotel_id as hotelId', 'user_id as userId', 'name', 'city', 'country', 'description', 'type', 'facilities', 'adult_count as adultCount', 'child_count as childCount', 'price_per_night as pricePerNight', 'star_rating as starRating', 'image_urls as imageUrls', 'last_updated as lastUpdated')
+                .from('hotels')
+                .where({ hotel_id: id });
+            return result;
+        });
+    }
 }
 exports.default = HotelModel;

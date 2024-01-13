@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { useLazySignOutQuery } from '../redux/api';
+import { api, useLazySignOutQuery } from '../redux/api';
 import { useAppDispatch, useAppSelector } from '../redux/reduxHooks';
 import { logout } from '../redux/slice/user_slice';
+import { persistor } from '../redux/store/store';
 // import { useAppContext } from "../contexts/AppContext";
 // import SignOutButton from "./SignOutButton";
 
@@ -12,13 +13,9 @@ const Header = () => {
   const [signOut, { isSuccess }] = useLazySignOutQuery();
 
   const handleClick = () => {
-    setTimeout(() => {
-      console.log('GIII');
-    }, 300);
-
-    console.log('HII');
-
+    dispatch(api.util.resetApiState());
     dispatch(logout());
+    persistor.flush();
     signOut();
   };
 

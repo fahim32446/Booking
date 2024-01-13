@@ -20,13 +20,31 @@ class HotelController extends abstract_controllers_1.default {
         super();
         this.hotelService = new hotel_service_1.default();
         this.validator = new hotel_validator_1.default();
-        this.addHotel = this.assyncWrapper.wrap([], (req, res) => __awaiter(this, void 0, void 0, function* () {
+        this.addHotel = this.assyncWrapper.wrap(this.validator.addHotel, (req, res) => __awaiter(this, void 0, void 0, function* () {
             const data = yield this.hotelService.addHotel(req, res);
             if (data.success) {
                 res.status(200).json(data);
             }
             else {
                 this.error('Creating new hotels error');
+            }
+        }));
+        this.getHotels = this.assyncWrapper.wrap([], (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const data = yield this.hotelService.getHotels(req);
+            if (data.success) {
+                res.status(200).json(data);
+            }
+            else {
+                this.error('error');
+            }
+        }));
+        this.getSingleHotel = this.assyncWrapper.wrap([], (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const data = yield this.hotelService.getSingleHotel(req);
+            if (data.success) {
+                res.status(200).json(data);
+            }
+            else {
+                this.error('error');
             }
         }));
     }

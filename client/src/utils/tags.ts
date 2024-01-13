@@ -1,2 +1,2 @@
 export const user = 'user';
-export const hotel = 'hotel'
+export const hotel = 'hotel';

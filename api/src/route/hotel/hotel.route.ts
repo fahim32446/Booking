@@ -18,19 +18,25 @@ class HotelRoute extends AbstractRouter {
     super();
     this.initRouters();
   }
+
+  // My Hotels Routes Private
   initRouters() {
     this.routers.post(
       '/',
       upload.array('imageFiles', 6),
       this.hotelController.addHotel
     );
+    this.routers.get('/', this.hotelController.getHotels);
+    this.routers.get('/:id', this.hotelController.getSingleHotel);
+
+    // Get all hotels Public
+
     // .post('/sign-google', this.hotelController.signGoogle)
     // .post('/sign-up', this.hotelController.signUp)
     // .post('/forgot-password', this.hotelController.forgotPassword)
     // .post('/verify-otp', this.hotelController.verifyOTP)
     // .post('/reset-password', this.hotelController.resetPassword);
 
-    // this.routers.get('/verify-token', this.hotelController.signOut);
     // this.routers.get('/sign-out', this.hotelController.signOut);
   }
 }
