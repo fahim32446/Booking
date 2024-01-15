@@ -14,8 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.uploadImages = void 0;
 const cloudinary_1 = __importDefault(require("cloudinary"));
+const customError_1 = __importDefault(require("./error/customError"));
 function uploadImages(imageFiles) {
     return __awaiter(this, void 0, void 0, function* () {
+        if (!imageFiles)
+            throw new customError_1.default('No uploaded image found', 400, 'Bad Request');
         const uploadPromises = imageFiles.map((image) => __awaiter(this, void 0, void 0, function* () {
             const b64 = Buffer.from(image.buffer).toString('base64');
             let dataURI = 'data:' + image.mimetype + ';base64,' + b64;

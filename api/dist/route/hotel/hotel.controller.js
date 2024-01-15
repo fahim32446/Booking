@@ -47,6 +47,15 @@ class HotelController extends abstract_controllers_1.default {
                 this.error('error');
             }
         }));
+        this.updateHotel = this.assyncWrapper.wrap([], (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const data = yield this.hotelService.updateHotel(req);
+            if (data.success) {
+                res.status(200).json(data);
+            }
+            else {
+                this.error('error');
+            }
+        }));
     }
 }
 exports.default = HotelController;

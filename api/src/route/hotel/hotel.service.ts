@@ -37,7 +37,7 @@ class HotelService extends AbstractServices {
       return {
         success: true,
         data: result,
-        message: 'User login successfully done',
+        message: 'Add new hotel successfully done',
       };
     });
   }
@@ -53,7 +53,7 @@ class HotelService extends AbstractServices {
       return {
         success: true,
         data: result,
-        message: 'User login successfully done',
+        message: 'Get all hotel',
       };
     });
   }
@@ -70,7 +70,46 @@ class HotelService extends AbstractServices {
       return {
         success: true,
         data: result,
-        message: 'User login successfully done',
+        message: 'Get single hotel',
+      };
+    });
+  }
+
+  public async updateHotel(req: Request) {
+    return await this.models.db.transaction(async (trx) => {
+      const updatedHotel: IHotelType = req.body;
+      const hotelID = req.params.id.toString();
+
+      const hotel_conn = this.models.hotelModel(req);
+
+      const files = req.files as Express.Multer.File[];
+      const updatedImageUrls = await uploadImages(files);
+
+      const imageUrls = [
+        ...updatedImageUrls,
+        ...(updatedHotel.imageUrls || []),
+      ];
+
+      const data: HotelData = {
+        name: updatedHotel.name,
+        city: updatedHotel.city,
+        country: updatedHotel.country,
+        description: updatedHotel.description,
+        type: updatedHotel.type,
+        adult_count: updatedHotel.adultCount,
+        child_count: updatedHotel.childCount,
+        price_per_night: updatedHotel.pricePerNight,
+        star_rating: updatedHotel.starRating,
+        facilities: JSON.stringify(updatedHotel.facilities),
+        image_urls: JSON.stringify(imageUrls),
+      };
+
+      const result = await hotel_conn.updateHotel(hotelID, data);
+
+      return {
+        success: true,
+        data: result,
+        message: 'Hotel update has been successfully done',
       };
     });
   }

@@ -24,6 +24,7 @@ class HotelRoute extends abstract_routers_1.default {
         this.routers.post('/', upload.array('imageFiles', 6), this.hotelController.addHotel);
         this.routers.get('/', this.hotelController.getHotels);
         this.routers.get('/:id', this.hotelController.getSingleHotel);
+        this.routers.put('/:id', upload.array('imageFiles', 6), this.hotelController.updateHotel);
         // Get all hotels Public
         // .post('/sign-google', this.hotelController.signGoogle)
         // .post('/sign-up', this.hotelController.signUp)

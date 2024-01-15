@@ -28,6 +28,11 @@ class HotelRoute extends AbstractRouter {
     );
     this.routers.get('/', this.hotelController.getHotels);
     this.routers.get('/:id', this.hotelController.getSingleHotel);
+    this.routers.put(
+      '/:id',
+      upload.array('imageFiles', 6),
+      this.hotelController.updateHotel
+    );
 
     // Get all hotels Public
 

@@ -49,6 +49,19 @@ class HotelController extends AbstractController {
       }
     }
   );
+
+  public updateHotel = this.assyncWrapper.wrap(
+    [],
+    async (req: Request, res: Response) => {
+      const data = await this.hotelService.updateHotel(req);
+
+      if (data.success) {
+        res.status(200).json(data);
+      } else {
+        this.error('error');
+      }
+    }
+  );
 }
 
 export default HotelController;

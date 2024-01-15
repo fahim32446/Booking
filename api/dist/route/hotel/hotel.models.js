@@ -39,5 +39,14 @@ class HotelModel extends abstract_models_1.default {
             return result;
         });
     }
+    updateHotel(id, data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield this.query()
+                .update(data)
+                .into('hotels')
+                .where({ hotel_id: id });
+            return result;
+        });
+    }
 }
 exports.default = HotelModel;

@@ -43,7 +43,7 @@ class HotelService extends abstract_service_1.default {
                 return {
                     success: true,
                     data: result,
-                    message: 'User login successfully done',
+                    message: 'Add new hotel successfully done',
                 };
             }));
         });
@@ -57,7 +57,7 @@ class HotelService extends abstract_service_1.default {
                 return {
                     success: true,
                     data: result,
-                    message: 'User login successfully done',
+                    message: 'Get all hotel',
                 };
             }));
         });
@@ -72,7 +72,41 @@ class HotelService extends abstract_service_1.default {
                 return {
                     success: true,
                     data: result,
-                    message: 'User login successfully done',
+                    message: 'Get single hotel',
+                };
+            }));
+        });
+    }
+    updateHotel(req) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.models.db.transaction((trx) => __awaiter(this, void 0, void 0, function* () {
+                const updatedHotel = req.body;
+                const hotelID = req.params.id.toString();
+                const hotel_conn = this.models.hotelModel(req);
+                const files = req.files;
+                const updatedImageUrls = yield (0, imageUpload_1.uploadImages)(files);
+                const imageUrls = [
+                    ...updatedImageUrls,
+                    ...(updatedHotel.imageUrls || []),
+                ];
+                const data = {
+                    name: updatedHotel.name,
+                    city: updatedHotel.city,
+                    country: updatedHotel.country,
+                    description: updatedHotel.description,
+                    type: updatedHotel.type,
+                    adult_count: updatedHotel.adultCount,
+                    child_count: updatedHotel.childCount,
+                    price_per_night: updatedHotel.pricePerNight,
+                    star_rating: updatedHotel.starRating,
+                    facilities: JSON.stringify(updatedHotel.facilities),
+                    image_urls: JSON.stringify(imageUrls),
+                };
+                const result = yield hotel_conn.updateHotel(hotelID, data);
+                return {
+                    success: true,
+                    data: result,
+                    message: 'Hotel update has been successfully done',
                 };
             }));
         });

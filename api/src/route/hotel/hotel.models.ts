@@ -41,6 +41,15 @@ class HotelModel extends AbstractModels {
 
     return result;
   }
+
+  async updateHotel(id: string | number, data: HotelData) {
+    const result = await this.query()
+      .update(data)
+      .into('hotels')
+      .where({ hotel_id: id });
+
+    return result;
+  }
 }
 
 export default HotelModel;
