@@ -1,19 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
-import {
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-  persistStore,
-} from 'redux-persist';
+import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import userReducer from '../slice/user_slice';
-import searchReducer from '../slice/search_slice';
 import { api } from '../api';
+import searchReducer from '../slice/search_slice';
+import userReducer from '../slice/user_slice';
 
 // Combine reducers
 const rootReducer = combineReducers({

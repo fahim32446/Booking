@@ -13,6 +13,7 @@ import AddHotel from './pages/hotel/page/AddHotel';
 import MyHotels from './pages/hotel/page/MyHotels';
 import EditHotel from './pages/hotel/page/EditHotel';
 import Search from './pages/search/pages/Search';
+import HotelDetails from './pages/search/pages/HotelDetails';
 
 const errorElement = <ErrorPage />;
 
@@ -42,6 +43,11 @@ const browserRouter = createBrowserRouter([
       {
         path: '/search',
         element: <Search />,
+      },
+
+      {
+        path: '/details/:id',
+        element: <HotelDetails />,
       },
 
       // 404

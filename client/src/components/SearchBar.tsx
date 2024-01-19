@@ -1,10 +1,10 @@
 import { FormEvent, useState } from 'react';
 import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import { MdTravelExplore } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../redux/reduxHooks';
-import { saveSearchValues } from '../redux/slice/search_slice';
-import 'react-datepicker/dist/react-datepicker.css';
+import { clearSearch, saveSearchValues } from '../redux/slice/search_slice';
 
 const SearchBar = () => {
   const navigate = useNavigate();
@@ -30,6 +30,10 @@ const SearchBar = () => {
     );
 
     navigate('/search');
+  };
+
+  const clear = () => {
+    dispatch(clearSearch());
   };
 
   const minDate = new Date();
@@ -107,7 +111,10 @@ const SearchBar = () => {
         <button className='w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500'>
           Search
         </button>
-        <button className='w-1/3 bg-red-600 text-white h-full p-2 font-bold text-xl hover:bg-red-500'>
+        <button
+          onClick={clear}
+          className='w-1/3 bg-red-600 text-white h-full p-2 font-bold text-xl hover:bg-red-500'
+        >
           Clear
         </button>
       </div>

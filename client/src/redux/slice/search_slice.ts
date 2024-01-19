@@ -7,8 +7,11 @@ type SearchState = {
   checkOut: Date;
   adultCount: number;
   childCount: number;
-  hotelId: string;
-  stars: string[];
+  hotelId?: string;
+  stars?: string[];
+  type?: string[];
+  facility?: string[];
+  price?: number | undefined | null;
 };
 
 const initialState: SearchState = {
@@ -19,6 +22,9 @@ const initialState: SearchState = {
   childCount: 1,
   hotelId: '',
   stars: [],
+  type: [],
+  facility: [],
+  price: null,
 };
 
 const searchSlice = createSlice({
@@ -34,7 +40,10 @@ const searchSlice = createSlice({
         adultCount: number;
         childCount: number;
         hotelId?: string;
-        stars: string[];
+        stars?: string[];
+        type?: string[];
+        facility?: string[];
+        price?: number | undefined | null;
       }>
     ) => {
       const {
@@ -45,6 +54,9 @@ const searchSlice = createSlice({
         childCount,
         hotelId,
         stars,
+        type,
+        facility,
+        price,
       } = action.payload;
 
       state.destination = destination;
@@ -53,15 +65,22 @@ const searchSlice = createSlice({
       state.adultCount = adultCount;
       state.childCount = childCount;
       state.stars = stars;
+      state.type = type;
+      state.facility = facility;
+      state.price = price;
 
       if (hotelId) {
         state.hotelId = hotelId;
       }
     },
+
+    clearSearch: (state) => {
+      state = initialState;
+    },
   },
 });
 
-export const { saveSearchValues } = searchSlice.actions;
+export const { saveSearchValues, clearSearch } = searchSlice.actions;
 
 export const selectSearch = (state: RootState) => state.search;
 

@@ -17,10 +17,22 @@ export const searchEndpoints = api.injectEndpoints({
           checkOut: arg.checkOut,
           page: arg.page || 1,
           star_rating: arg.star_rating,
+          type: arg.type,
+          facilities: arg.facilities,
+          price_per_night: arg.price_per_night,
+          sort_by: arg.sort_by,
         },
+      }),
+    }),
+
+    getHotelDetails: build.query<HttpResponse<HotelType>, string>({
+      query: (arg) => ({
+        url: `/hotel/details/${arg}`,
+        method: 'GET',
       }),
     }),
   }),
 });
 
-export const { useLazySearchHotelQuery } = searchEndpoints;
+export const { useLazySearchHotelQuery, useGetHotelDetailsQuery } =
+  searchEndpoints;
