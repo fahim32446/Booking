@@ -12,12 +12,14 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import userReducer from '../slice/user_slice';
+import searchReducer from '../slice/search_slice';
 import { api } from '../api';
 
 // Combine reducers
 const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
   user: userReducer,
+  search: searchReducer,
 });
 
 // Configuration for Redux Persist
@@ -34,9 +36,10 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
+      serializableCheck: false,
+      // {
+      //   ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      // },
     }).concat(api.middleware),
 });
 

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
   useGetMySingleHotelQuery,
@@ -9,6 +9,7 @@ import ManageHotelForm from '../components/ManageHotelForm';
 
 const EditHotel = () => {
   const { hotelId } = useParams();
+  const navigate = useNavigate();
 
   const { data: hotel } = useGetMySingleHotelQuery({ id: hotelId! });
 
@@ -29,7 +30,11 @@ const EditHotel = () => {
     if (isError) {
       toast.error('Something happened to wrong');
     }
-  }, [isError]);
+    if (updateSuccess) {
+      toast.success('Hotel saved!');
+      // navigate(-1);
+    }
+  }, [isError, updateSuccess]);
 
   return (
     <ManageHotelForm

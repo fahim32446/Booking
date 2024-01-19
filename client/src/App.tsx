@@ -12,6 +12,7 @@ import RequireAuth from './components/RequireAuth';
 import AddHotel from './pages/hotel/page/AddHotel';
 import MyHotels from './pages/hotel/page/MyHotels';
 import EditHotel from './pages/hotel/page/EditHotel';
+import Search from './pages/search/pages/Search';
 
 const errorElement = <ErrorPage />;
 
@@ -36,6 +37,11 @@ const browserRouter = createBrowserRouter([
       {
         path: '/sign-in',
         element: <SignIn />,
+      },
+
+      {
+        path: '/search',
+        element: <Search />,
       },
 
       // 404

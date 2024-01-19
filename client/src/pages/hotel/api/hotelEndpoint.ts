@@ -7,7 +7,7 @@ export const hotelEndpoint = api.injectEndpoints({
   endpoints: (build) => ({
     addMyHotel: build.mutation<HttpResponse<void>, { data: FormData }>({
       query: ({ data }) => ({
-        url: `/hotel`,
+        url: `/my-hotel`,
         method: 'POST',
         body: data,
       }),
@@ -16,7 +16,7 @@ export const hotelEndpoint = api.injectEndpoints({
 
     getMyHotels: build.query<HttpResponse<getHotels[]>, void>({
       query: () => ({
-        url: `/hotel`,
+        url: `/my-hotel`,
         method: 'GET',
       }),
       providesTags: () => [hotel],
@@ -24,7 +24,7 @@ export const hotelEndpoint = api.injectEndpoints({
 
     getMySingleHotel: build.query<HttpResponse<HotelType>, { id: string }>({
       query: ({ id }) => ({
-        url: `/hotel/${id}`,
+        url: `/my-hotel/${id}`,
         method: 'GET',
       }),
       providesTags: () => [hotel],
@@ -35,7 +35,7 @@ export const hotelEndpoint = api.injectEndpoints({
       { id: string; body: FormData }
     >({
       query: ({ id, body }) => ({
-        url: `/hotel/${id}`,
+        url: `/my-hotel/${id}`,
         method: 'PUT',
         body: body,
       }),

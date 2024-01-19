@@ -12,9 +12,9 @@ const path_1 = __importDefault(require("path"));
 const authChecker_1 = __importDefault(require("./common/middlewares/authChecker"));
 const errorHandler_1 = __importDefault(require("./common/middlewares/errorHandler"));
 const mini_1 = __importDefault(require("./common/mini"));
-const auth_route_1 = __importDefault(require("./route/auth/auth.route"));
 const config_1 = __importDefault(require("./utils/config"));
-const routes_1 = __importDefault(require("./routes"));
+const private_routes_1 = __importDefault(require("./routes/private_routes"));
+const public_routes_1 = __importDefault(require("./routes/public_routes"));
 class App {
     constructor() {
         this.app = (0, express_1.default)();
@@ -45,14 +45,15 @@ class App {
         this.app.get('/', (_req, res) => {
             res.send('app is running successfully...');
         });
-        this.app.use('/api/v1/auth', new auth_route_1.default().routers);
+        (0, public_routes_1.default)(this.app);
+        // this.app.use('/api/v1/auth', new AuthRoute().routers);
     }
     moduleRouters() {
         /**
          * @router {Auth checker}
          */
         this.app.use(this.authChecker.check);
-        (0, routes_1.default)(this.app);
+        (0, private_routes_1.default)(this.app);
     }
     notFoundRouter() {
         this.app.use(this.Mini[404]);

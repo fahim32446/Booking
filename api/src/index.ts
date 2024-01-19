@@ -7,10 +7,11 @@ import path from 'path';
 import AuthChecker from './common/middlewares/authChecker';
 import ErrorHandler from './common/middlewares/errorHandler';
 import Mini from './common/mini';
-import AuthRoute from './route/auth/auth.route';
 import config from './utils/config';
-import routes from './routes';
+import private_routes from './routes/private_routes';
 import { v2 as cloudinary } from 'cloudinary';
+import AuthRoute from './modules/public/auth/auth.route';
+import public_routes from './routes/public_routes';
 
 class App {
   public app = express();
@@ -47,8 +48,8 @@ class App {
     this.app.get('/', (_req, res) => {
       res.send('app is running successfully...');
     });
-
-    this.app.use('/api/v1/auth', new AuthRoute().routers);
+    public_routes(this.app);
+    // this.app.use('/api/v1/auth', new AuthRoute().routers);
   }
 
   private moduleRouters() {
@@ -57,7 +58,7 @@ class App {
      */
     this.app.use(this.authChecker.check);
 
-    routes(this.app);
+    private_routes(this.app);
   }
 
   private notFoundRouter() {

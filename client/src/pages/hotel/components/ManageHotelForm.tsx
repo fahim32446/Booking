@@ -54,9 +54,9 @@ const ManageHotelForm = ({ isLoading, onSave, hotel, isSuccess }: Props) => {
     onSave(formData);
   });
 
-  // useEffect(() => {
-  //   if (isSuccess) reset({});
-  // }, [isSuccess]);
+  useEffect(() => {
+    if (isSuccess) reset({});
+  }, [isSuccess]);
 
   return (
     <FormProvider {...formMethods}>
