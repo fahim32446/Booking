@@ -26,6 +26,7 @@ class hotelService extends AbstractServices {
         price_per_night,
         star_rating,
         type,
+        sort_by,
       } = req.query as IHotelSearchType;
 
       const skip = (pageNumber - 1) * pageSize;
@@ -41,13 +42,28 @@ class hotelService extends AbstractServices {
         price_per_night,
         star_rating,
         type,
+        sort_by,
       });
 
       return {
         success: true,
         count: data.count,
         data: data.result,
-        message: 'Get all hotel',
+      };
+    });
+  }
+
+  public async hotelDetails(req: Request) {
+    return await this.models.db.transaction(async (trx) => {
+      const id = req.params.id.toString();
+
+      const hotel_conn = this.models.HotelModel(req);
+
+      const result = await hotel_conn.hotelDetails(id);
+
+      return {
+        success: true,
+        data: result,
       };
     });
   }

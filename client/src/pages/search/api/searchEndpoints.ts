@@ -1,7 +1,12 @@
 import { api } from '../../../redux/api';
 import { HttpResponse } from '../../../utils/commonTypes';
 import { HotelType } from '../../hotel/utils/hotelType';
-import { IHotelSearchType } from '../utils/SearchPageType';
+import {
+  IConfirmBooking,
+  IHotelSearchType,
+  IPaymentBody,
+  IPaymentType,
+} from '../utils/SearchPageType';
 
 export const searchEndpoints = api.injectEndpoints({
   endpoints: (build) => ({
@@ -31,8 +36,28 @@ export const searchEndpoints = api.injectEndpoints({
         method: 'GET',
       }),
     }),
+
+    postPayment: build.mutation<HttpResponse<IPaymentType>, IPaymentBody>({
+      query: (arg) => ({
+        url: `user/booking-payment/${arg.hotelId}`,
+        method: 'POST',
+        body: { numberOfNights: arg.numberOfNights },
+      }),
+    }),
+
+    confirmBooking: build.mutation<HttpResponse<void>, IConfirmBooking>({
+      query: (arg) => ({
+        url: `user/booking-confirm/${arg.hotel_id}`,
+        method: 'POST',
+        body: arg,
+      }),
+    }),
   }),
 });
 
-export const { useLazySearchHotelQuery, useGetHotelDetailsQuery } =
-  searchEndpoints;
+export const {
+  useLazySearchHotelQuery,
+  useGetHotelDetailsQuery,
+  usePostPaymentMutation,
+  useConfirmBookingMutation,
+} = searchEndpoints;

@@ -14,6 +14,7 @@ import MyHotels from './pages/hotel/page/MyHotels';
 import EditHotel from './pages/hotel/page/EditHotel';
 import Search from './pages/search/pages/Search';
 import HotelDetails from './pages/search/pages/HotelDetails';
+import BookingHotels from './pages/search/pages/BookingHotels';
 
 const errorElement = <ErrorPage />;
 
@@ -82,6 +83,11 @@ const browserRouter = createBrowserRouter([
       {
         path: `/edit-hotel/:hotelId`,
         element: <EditHotel />,
+      },
+
+      {
+        path: `/hotel/:hotelId/booking`,
+        element: <BookingHotels />,
       },
     ],
   },

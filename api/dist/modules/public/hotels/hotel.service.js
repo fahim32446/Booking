@@ -23,7 +23,7 @@ class hotelService extends abstract_service_1.default {
                 const hotel_conn = this.models.HotelModel(req);
                 const pageSize = 10;
                 const pageNumber = parseInt(req.query.page ? req.query.page.toString() : '1');
-                const { adult_count, child_count, city, country, facilities, name, price_per_night, star_rating, type, } = req.query;
+                const { adult_count, child_count, city, country, facilities, name, price_per_night, star_rating, type, sort_by, } = req.query;
                 const skip = (pageNumber - 1) * pageSize;
                 const data = yield hotel_conn.searchHotel({
                     skip,
@@ -36,12 +36,25 @@ class hotelService extends abstract_service_1.default {
                     price_per_night,
                     star_rating,
                     type,
+                    sort_by,
                 });
                 return {
                     success: true,
                     count: data.count,
                     data: data.result,
-                    message: 'Get all hotel',
+                };
+            }));
+        });
+    }
+    hotelDetails(req) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.models.db.transaction((trx) => __awaiter(this, void 0, void 0, function* () {
+                const id = req.params.id.toString();
+                const hotel_conn = this.models.HotelModel(req);
+                const result = yield hotel_conn.hotelDetails(id);
+                return {
+                    success: true,
+                    data: result,
                 };
             }));
         });

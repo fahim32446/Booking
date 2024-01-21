@@ -11,6 +11,7 @@ class hotel extends AbstractRouter {
 
   initRouters() {
     this.routers.get('/search', this.controller.searchHotel);
+    this.routers.get('/details/:id', this.controller.hotelDetails);
   }
 }
 export default hotel;

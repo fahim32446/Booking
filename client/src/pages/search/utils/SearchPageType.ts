@@ -13,3 +13,25 @@ export interface IHotelSearchType {
   page: number;
   sort_by?: string;
 }
+
+export interface IPaymentType {
+  paymentIntentId: string;
+  clientSecret: string;
+  totalCost: number;
+}
+
+export interface IPaymentBody {
+  hotelId: number | string;
+  numberOfNights: number | string;
+}
+
+export interface IConfirmBooking {
+  adult_count: number;
+  child_count: number;
+  check_in: string;
+  check_out: string;
+  user_id?: number;
+  total_cost: string;
+  hotel_id: number;
+  paymentIntentId: string;
+}

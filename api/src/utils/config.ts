@@ -17,6 +17,7 @@ interface Config {
   CLOUDINARY_CLOUD_NAME: string;
   CLOUDINARY_API_KEY: string;
   CLOUDINARY_API_SECRET: string;
+  STRIPE_API_KEY: string;
 }
 
 const config: Config = {
@@ -24,8 +25,10 @@ const config: Config = {
   DB_USER: process.env.DB_USER || '',
   DB_PORT: process.env.DB_PORT || '',
   DB_HOST: process.env.DB_HOST || '',
+
   COOKIES_NAME: process.env.COOKIES_NAME || 'auth_token',
   JWT_SECRET: process.env.JWT_SECRET || '',
+
   SERVER_PORT: process.env.SERVER_PORT || '5000',
   SENDER_EMAIL: process.env.SENDER_EMAIL || '',
   SENDER_EMAIL_APP_PASS: process.env.SENDER_EMAIL_APP_PASS || '',
@@ -33,6 +36,8 @@ const config: Config = {
   CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY || '',
   CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME || '',
   CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET || '',
+
+  STRIPE_API_KEY: process.env.STRIPE_API_KEY || '',
 };
 
 export default config;

@@ -12,32 +12,42 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.userController = void 0;
 const abstract_controllers_1 = __importDefault(require("../../../abstract/abstract.controllers"));
-const hotel_service_1 = __importDefault(require("./hotel.service"));
-const hotel_validator_1 = __importDefault(require("./hotel.validator"));
-class hotelController extends abstract_controllers_1.default {
+const user_service_1 = require("./user.service");
+const user_validator_1 = require("./user.validator");
+class userController extends abstract_controllers_1.default {
     constructor() {
         super();
-        this.hotelService = new hotel_service_1.default();
-        this.validator = new hotel_validator_1.default();
-        this.searchHotel = this.assyncWrapper.wrap([], (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const data = yield this.hotelService.searchHotel(req);
+        this.validator = new user_validator_1.userValidator();
+        this.userService = new user_service_1.userService();
+        this.checkUser = this.assyncWrapper.wrap([], (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const data = yield this.userService.checkUser(req);
             if (data.success) {
                 res.status(200).json(data);
             }
             else {
-                this.error('error');
+                this.error('Creating new hotels error');
             }
         }));
-        this.hotelDetails = this.assyncWrapper.wrap(this.validator.hotelDetails, (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const data = yield this.hotelService.hotelDetails(req);
+        this.bookingPayment = this.assyncWrapper.wrap([], (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const data = yield this.userService.bookingPayment(req);
             if (data.success) {
                 res.status(200).json(data);
             }
             else {
-                this.error('error');
+                this.error('Creating new hotels error');
+            }
+        }));
+        this.bookingConfirm = this.assyncWrapper.wrap(this.validator.bookingConfirm, (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const data = yield this.userService.bookingConfirm(req);
+            if (data.success) {
+                res.status(200).json(data);
+            }
+            else {
+                this.error('Creating new hotels error');
             }
         }));
     }
 }
-exports.default = hotelController;
+exports.userController = userController;

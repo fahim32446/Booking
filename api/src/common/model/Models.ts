@@ -4,6 +4,8 @@ import { db } from '../../database';
 import MyHotelModel from '../../modules/private/my_hotels/my_hotel.models';
 import AuthModel from '../../modules/public/auth/auth.models';
 import HotelModel from '../../modules/public/hotels/hotel.models';
+import { userModel } from '../../modules/private/user/user.model';
+import { BookingModal } from '../../modules/private/booking/booking.modal';
 
 class Models {
   public db = db;
@@ -18,6 +20,14 @@ class Models {
 
   public HotelModel(req: Request, trx?: Knex.Transaction) {
     return new HotelModel(trx || this.db, req);
+  }
+
+  public userModal(req: Request, trx?: Knex.Transaction) {
+    return new userModel(trx || this.db, req);
+  }
+
+  public BookingModal(req: Request, trx?: Knex.Transaction) {
+    return new BookingModal(trx || this.db, req);
   }
 }
 
