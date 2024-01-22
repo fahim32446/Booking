@@ -18,7 +18,7 @@ const BookingHotels = () => {
 
   const currentUser = user.user?.email;
 
-  const { data: hotel, isLoading } = useGetMySingleHotelQuery({ id: hotelId! });
+  const { data: hotel } = useGetMySingleHotelQuery({ id: hotelId! });
 
   const [numberOfNights, setNumberOfNights] = useState<number>(0);
 

@@ -10,7 +10,7 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.user);
 
-  const [signOut, { isSuccess }] = useLazySignOutQuery();
+  const [signOut] = useLazySignOutQuery();
 
   const handleClick = () => {
     dispatch(api.util.resetApiState());

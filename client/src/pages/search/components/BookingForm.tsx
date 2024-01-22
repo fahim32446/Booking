@@ -34,8 +34,7 @@ const BookingForm = ({ paymentIntent }: Props) => {
   const currentUser = useAppSelector((state) => state.user.user);
   const search = useAppSelector((state) => state.search);
 
-  const [createBooking, { isLoading, data, isSuccess }] =
-    useConfirmBookingMutation();
+  const [createBooking, { isLoading, isSuccess }] = useConfirmBookingMutation();
 
   const { handleSubmit, register } = useForm<BookingFormData>({
     defaultValues: {

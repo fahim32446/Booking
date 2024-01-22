@@ -7,13 +7,11 @@ import PriceFilter from '../components/PriceFilter';
 import SearchResultsCard from '../components/SearchResultsCard';
 import StarRatingFilter from '../components/StarRatingFilter';
 
-type Props = {};
-
-const Search = (props: Props) => {
+const Search = () => {
   const search = useAppSelector((state) => state.search);
   const [sortOption, setSortOption] = useState<string>('');
 
-  const [getSearch, { isLoading, isError, data }] = useLazySearchHotelQuery();
+  const [getSearch, { data }] = useLazySearchHotelQuery();
 
   useEffect(() => {
     window.scrollTo({

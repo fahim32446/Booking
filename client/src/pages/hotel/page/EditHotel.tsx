@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
   useGetMySingleHotelQuery,
@@ -9,7 +9,7 @@ import ManageHotelForm from '../components/ManageHotelForm';
 
 const EditHotel = () => {
   const { hotelId } = useParams();
-  const navigate = useNavigate();
+
 
   const { data: hotel } = useGetMySingleHotelQuery({ id: hotelId! });
 

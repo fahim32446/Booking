@@ -3,10 +3,8 @@ import { BsBuilding, BsMap } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { useGetMyHotelsQuery } from '../api/hotelEndpoint';
 
-type Props = {};
-
-const MyHotels = (props: Props) => {
-  const { isLoading, isError, data } = useGetMyHotelsQuery();
+const MyHotels = () => {
+  const { data } = useGetMyHotelsQuery();
 
   const hotelData = data?.data;
 

@@ -6,7 +6,7 @@ import GuestInfoForm from '../components/GuestInfoForm';
 const HotelDetails = () => {
   const { id } = useParams();
 
-  const { isLoading, data } = useGetHotelDetailsQuery(id!);
+  const { data } = useGetHotelDetailsQuery(id!);
 
   const hotel = data?.data;
 

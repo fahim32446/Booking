@@ -74,8 +74,8 @@ const searchSlice = createSlice({
       }
     },
 
-    clearSearch: (state) => {
-      state = initialState;
+    clearSearch: (_states) => {
+      _states = initialState;
     },
   },
 });
