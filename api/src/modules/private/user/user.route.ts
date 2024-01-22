@@ -3,6 +3,7 @@ import { userController } from './user.controller';
 
 class userRoute extends AbstractRouter {
   private userController = new userController();
+  
   constructor() {
     super();
     this.initRouters();
