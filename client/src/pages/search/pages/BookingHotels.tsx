@@ -7,6 +7,7 @@ import BookingForm from '../components/BookingForm';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { usePostPaymentMutation } from '../api/searchEndpoints';
+import Loading from '../../../components/Loading';
 
 const STRIPE_PUB_KEY = import.meta.env.VITE_STRIPE_PUB_KEY || '';
 
@@ -18,7 +19,7 @@ const BookingHotels = () => {
 
   const currentUser = user.user?.email;
 
-  const { data: hotel } = useGetMySingleHotelQuery({ id: hotelId! });
+  const { data: hotel, isLoading } = useGetMySingleHotelQuery({ id: hotelId! });
 
   const [numberOfNights, setNumberOfNights] = useState<number>(0);
 
@@ -43,6 +44,8 @@ const BookingHotels = () => {
       postPayment({ hotelId: hotelId!, numberOfNights: numberOfNights });
   }, [numberOfNights]);
 
+  if (isLoading) return <Loading />;
+
   if (!hotel?.data) {
     return <></>;
   }
@@ -57,6 +60,12 @@ const BookingHotels = () => {
         numberOfNights={numberOfNights}
         hotel={hotel.data}
       />
+
+      {numberOfNights == 0 && (
+        <p className='p-5 font-semibold text-center'>
+          Please select at least 1 night for payment
+        </p>
+      )}
       {currentUser && paymentToken && !paymentIntentLoading && (
         <Elements
           stripe={stripePromise}

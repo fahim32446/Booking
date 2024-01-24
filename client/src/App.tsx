@@ -7,14 +7,20 @@ import Registration from './pages/auth/Registration';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import SignIn from './pages/auth/Login';
 import RequireAuth from './components/RequireAuth';
+import SignIn from './pages/auth/Login';
 import AddHotel from './pages/hotel/page/AddHotel';
-import MyHotels from './pages/hotel/page/MyHotels';
 import EditHotel from './pages/hotel/page/EditHotel';
-import Search from './pages/search/pages/Search';
-import HotelDetails from './pages/search/pages/HotelDetails';
+import MyHotels from './pages/hotel/page/MyHotels';
 import BookingHotels from './pages/search/pages/BookingHotels';
+import HotelDetails from './pages/search/pages/HotelDetails';
+import Search from './pages/search/pages/Search';
+import MyBookings from './pages/search/pages/myBooking';
+import { api, useCheckUserQuery, useLazySignOutQuery } from './redux/api';
+import { useAppDispatch } from './redux/reduxHooks';
+import { logout } from './redux/slice/user_slice';
+import { persistor } from './redux/store/store';
+import { useEffect } from 'react';
 
 const errorElement = <ErrorPage />;
 
@@ -89,11 +95,38 @@ const browserRouter = createBrowserRouter([
         path: `/hotel/:hotelId/booking`,
         element: <BookingHotels />,
       },
+
+      {
+        path: '/my-bookings',
+        element: <MyBookings />,
+      },
     ],
   },
 ]);
 
 const App = () => {
+  const dispatch = useAppDispatch();
+
+  const { isError } = useCheckUserQuery();
+  const [signOut] = useLazySignOutQuery();
+
+  const logOut = () => {
+    dispatch(api.util.resetApiState());
+    dispatch(logout());
+    persistor.flush();
+    signOut();
+  };
+
+  useEffect(() => {
+    if (isError) {
+      logOut();
+    }
+  }, []);
+
+  // if (isError) {
+  //   logOut();
+  // }
+
   return (
     <div>
       <ToastContainer />

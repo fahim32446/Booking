@@ -1,14 +1,25 @@
+import { AiFillStar } from 'react-icons/ai';
 import { useParams } from 'react-router-dom';
 import { useGetHotelDetailsQuery } from '../api/searchEndpoints';
-import { AiFillStar } from 'react-icons/ai';
 import GuestInfoForm from '../components/GuestInfoForm';
+import Loading from '../../../components/Loading';
 
 const HotelDetails = () => {
   const { id } = useParams();
-
-  const { data } = useGetHotelDetailsQuery(id!);
+  const { data, isLoading } = useGetHotelDetailsQuery(id!);
 
   const hotel = data?.data;
+
+  if (isLoading) return <Loading />;
+
+  const image =
+    hotel?.imageUrls && Array.isArray(hotel?.imageUrls)
+      ? hotel?.imageUrls
+      : JSON.parse(String(hotel?.imageUrls));
+  const facilities =
+    hotel?.facilities && Array.isArray(hotel?.facilities)
+      ? hotel?.facilities
+      : JSON.parse(String(hotel?.facilities));
 
   return (
     <div className='space-y-6'>
@@ -22,7 +33,7 @@ const HotelDetails = () => {
       </div>
 
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
-        {hotel?.imageUrls.map((image, index) => (
+        {image?.map((image: string, index: number) => (
           <div key={index} className='h-[300px]'>
             <img
               src={image}
@@ -34,8 +45,8 @@ const HotelDetails = () => {
       </div>
 
       <div className='grid grid-cols-1 lg:grid-cols-4 gap-2'>
-        {hotel?.facilities &&
-          hotel?.facilities.map((facility, index) => (
+        {facilities &&
+          facilities?.map((facility: string, index: number) => (
             <div key={index} className='border border-slate-300 rounded-sm p-3'>
               {facility}
             </div>

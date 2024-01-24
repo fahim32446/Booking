@@ -9,7 +9,7 @@ export class BookingModal extends AbstractModels {
   }
 
   async getBookingList(userId: string | number) {
-    const [res] = await this.query()
+    const res = await this.query()
       .select(
         'check_in',
         'check_out',
@@ -24,7 +24,9 @@ export class BookingModal extends AbstractModels {
         'type',
         'price_per_night',
         'star_rating',
-        'image_urls'
+        'image_urls',
+        'bookings.adult_count as adultCount',
+        'bookings.child_count as childCount'
       )
       .from('bookings')
       .where({ 'bookings.user_id': userId })

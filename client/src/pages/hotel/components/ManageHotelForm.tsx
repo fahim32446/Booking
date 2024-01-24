@@ -19,7 +19,14 @@ const ManageHotelForm = ({ isLoading, onSave, hotel, isSuccess }: Props) => {
   const { handleSubmit, reset } = formMethods;
 
   useEffect(() => {
-    reset(hotel);
+    const facilitiesInStr: any = hotel?.facilities;
+    const facilities: string[] = facilitiesInStr && JSON.parse(facilitiesInStr);
+
+    const imageURLStr: any = hotel?.imageUrls;
+    const imageUrls: string[] = imageURLStr && JSON.parse(imageURLStr);
+
+    if (hotel)
+      reset({ ...hotel, facilities: facilities, imageUrls: imageUrls });
   }, [hotel, reset]);
 
   const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
@@ -41,8 +48,11 @@ const ManageHotelForm = ({ isLoading, onSave, hotel, isSuccess }: Props) => {
       formData.append(`facilities[${index}]`, facility);
     });
 
-    if (formDataJson.imageUrls) {
-      formDataJson.imageUrls.forEach((url, index) => {
+    const imageUrlsStr: any = formDataJson.imageUrls;
+    const imageUrls: string[] = imageUrlsStr && JSON.parse(imageUrlsStr);
+
+    if (imageUrls) {
+      imageUrls.forEach((url, index) => {
         formData.append(`imageUrls[${index}]`, url);
       });
     }

@@ -6,11 +6,20 @@ type Props = {
 };
 
 const SearchResultsCard = ({ hotel }: Props) => {
+  const image =
+    hotel?.imageUrls && Array.isArray(hotel?.imageUrls)
+      ? hotel?.imageUrls
+      : JSON.parse(String(hotel?.imageUrls));
+  const facilities =
+    hotel?.facilities && Array.isArray(hotel?.facilities)
+      ? hotel?.facilities
+      : JSON.parse(String(hotel?.facilities));
+
   return (
     <div className='grid grid-cols-1 xl:grid-cols-[2fr_3fr] border border-slate-300 rounded-lg p-8 gap-8'>
       <div className='w-full h-[300px]'>
         <img
-          src={hotel?.imageUrls[0]}
+          src={image[0]}
           className='w-full h-full object-cover object-center'
         />
       </div>
@@ -38,7 +47,7 @@ const SearchResultsCard = ({ hotel }: Props) => {
 
         <div className='grid grid-cols-2 items-end whitespace-nowrap'>
           <div className='flex gap-1 items-center'>
-            {hotel?.facilities?.slice(0, 3)?.map((facility, index) => (
+            {facilities?.slice(0, 3)?.map((facility: string, index: number) => (
               <span
                 key={index}
                 className='bg-slate-300 p-2 rounded-lg font-bold text-xs whitespace-nowrap'

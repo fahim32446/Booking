@@ -4,6 +4,7 @@ import { HotelType } from '../../hotel/utils/hotelType';
 import {
   IConfirmBooking,
   IHotelSearchType,
+  IMyBookingList,
   IPaymentBody,
   IPaymentType,
 } from '../utils/SearchPageType';
@@ -52,12 +53,21 @@ export const searchEndpoints = api.injectEndpoints({
         body: arg,
       }),
     }),
+
+    getMyBooking: build.query<HttpResponse<IMyBookingList[]>, void>({
+      query: () => ({
+        url: `booking/get-booking-list`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
 export const {
   useLazySearchHotelQuery,
+  useSearchHotelQuery,
   useGetHotelDetailsQuery,
   usePostPaymentMutation,
   useConfirmBookingMutation,
+  useGetMyBookingQuery,
 } = searchEndpoints;

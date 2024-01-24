@@ -16,7 +16,8 @@ const rootReducer = combineReducers({
 // Configuration for Redux Persist
 const persistConfig = {
   key: 'root', // Key for the persisted state
-  storage, // Storage type (e.g., localStorage)
+  storage,
+  blacklist: [api.reducerPath],
 };
 
 // Create a persisted reducer

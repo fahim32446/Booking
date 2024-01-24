@@ -25,15 +25,6 @@ export const api = createApi({
     baseUrl: `${import.meta.env.VITE_REACT_APP_BASE_URL}/api/v1`,
     credentials: 'include',
     prepareHeaders: async (headers) => {
-      // headers.set('Content-Type', 'application/json');
-      // headers.set('Accept', 'application/json');
-      //   const token = localStorage.getItem('trabill_ota');
-      //   const session_id = localStorage.getItem('__tus');
-
-      //   if (token) {
-      //     headers.set('Authorization', `Bearer ${token}`);
-      //     headers.set('session_id', `${session_id}`);
-      //   }
       return headers;
     },
   }) as BaseQueryFn<string | FetchArgs, unknown, CustomError, {}>,
@@ -93,6 +84,13 @@ export const api = createApi({
         method: 'POST',
       }),
     }),
+
+    checkUser: builder.query<HttpResponse<void>, void>({
+      query: () => ({
+        url: `/user/check-user`,
+        method: 'GET',
+      }),
+    }),
   }),
 
   tagTypes: [...user, hotel],
@@ -105,4 +103,5 @@ export const {
   useVerifyOTPMutation,
   useResetPasswordMutation,
   useLazySignOutQuery,
+  useCheckUserQuery,
 } = api;

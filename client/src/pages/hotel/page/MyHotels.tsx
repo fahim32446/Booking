@@ -2,11 +2,14 @@ import { BiHotel, BiMoney, BiStar } from 'react-icons/bi';
 import { BsBuilding, BsMap } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { useGetMyHotelsQuery } from '../api/hotelEndpoint';
+import Loading from '../../../components/Loading';
 
 const MyHotels = () => {
-  const { data } = useGetMyHotelsQuery();
+  const { data, isLoading } = useGetMyHotelsQuery();
 
   const hotelData = data?.data;
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className='space-y-5'>

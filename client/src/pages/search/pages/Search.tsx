@@ -6,12 +6,14 @@ import HotelTypesFilter from '../components/HotelTypesFilter';
 import PriceFilter from '../components/PriceFilter';
 import SearchResultsCard from '../components/SearchResultsCard';
 import StarRatingFilter from '../components/StarRatingFilter';
+import Loading from '../../../components/Loading';
 
 const Search = () => {
   const search = useAppSelector((state) => state.search);
   const [sortOption, setSortOption] = useState<string>('');
 
-  const [getSearch, { data }] = useLazySearchHotelQuery();
+  const [getSearch, { data, isLoading, isFetching }] =
+    useLazySearchHotelQuery();
 
   useEffect(() => {
     window.scrollTo({
@@ -32,6 +34,8 @@ const Search = () => {
       sort_by: sortOption,
     });
   }, [search, sortOption]);
+
+  // if (isLoading || isFetching) return <Loading />;
 
   return (
     <div className='grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5'>
@@ -63,9 +67,13 @@ const Search = () => {
             <option value='desc'>Price Per Night (high to low)</option>
           </select>
         </div>
-        {data?.data?.map((hotel, index) => (
-          <SearchResultsCard hotel={hotel} key={index} />
-        ))}
+        {isLoading || isFetching ? (
+          <Loading />
+        ) : (
+          data?.data?.map((hotel, index) => (
+            <SearchResultsCard hotel={hotel} key={index} />
+          ))
+        )}
         <div>
           {/* <Pagination
             page={hotelData?.pagination.page || 1}

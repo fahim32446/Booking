@@ -35,3 +35,22 @@ export interface IConfirmBooking {
   hotel_id: number;
   paymentIntentId: string;
 }
+
+export interface IMyBookingList {
+  check_in: string;
+  check_out: string;
+  total_cost: string;
+  hotel_id: number;
+  email: string;
+  first_name: string;
+  hotelName: string;
+  city: string;
+  country: string;
+  description: string;
+  type: string;
+  price_per_night: string;
+  star_rating: number;
+  image_urls: string;
+  adultCount: string;
+  childCount: string;
+}

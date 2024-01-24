@@ -6,12 +6,22 @@ import {
   useUpdateHotelMutation,
 } from '../api/hotelEndpoint';
 import ManageHotelForm from '../components/ManageHotelForm';
+import { HotelType } from '../utils/hotelType';
+import Loading from '../../../components/Loading';
 
 const EditHotel = () => {
   const { hotelId } = useParams();
 
+  const { data: hotel, isLoading } = useGetMySingleHotelQuery({ id: hotelId! });
 
-  const { data: hotel } = useGetMySingleHotelQuery({ id: hotelId! });
+  const hotelData = hotel?.data;
+
+  // const image_Urls = JSON.parse(String(hotelData?.imageUrls));
+
+  // const hotelDataWithImage = {
+  //   ...hotelData,
+  //   imageUrls: image_Urls,
+  // } as HotelType;
 
   const [
     updateHotel,
@@ -24,7 +34,6 @@ const EditHotel = () => {
     // });
 
     updateHotel({ id: hotelId!, body: hotelFormData });
-    console.log(hotelFormData);
   };
   useEffect(() => {
     if (isError) {
@@ -36,9 +45,15 @@ const EditHotel = () => {
     }
   }, [isError, updateSuccess]);
 
+  // console.log(hotelDataWithImage);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <ManageHotelForm
-      hotel={hotel?.data}
+      hotel={hotelData}
       onSave={handleSave}
       isLoading={updateLoading}
       isSuccess={updateSuccess}

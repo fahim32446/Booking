@@ -14,6 +14,10 @@ class Mini {
       'http://localhost:5173',
       'https://localhost:5173',
       'localhost:5173',
+      'https://booking-client.meinfo.xyz/',
+      'http://booking-client.meinfo.xyz/',
+      'booking-client.meinfo.xyz',
+      'https://booking-client.meinfo.xyz',
     ];
   }
 

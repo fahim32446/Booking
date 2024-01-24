@@ -2,8 +2,6 @@ import fs from 'fs';
 import knex from 'knex';
 import config from './utils/config';
 
-// const serverCa = [fs.readFileSync('./DigiCertGlobalRootCA.crt.pem', 'utf8')];
-
 // export const db_name = 'booking';
 
 // const createDbConn = () => {
@@ -34,7 +32,7 @@ const createDbConn = () => {
     connection: {
       database: db_name,
       port: 3306,
-      host: '127.0.0.1',
+      host: 'meinfo.xyz',
       user: 'lrmobile_azmir',
       password: 'lrmobile_azmir',
     },
