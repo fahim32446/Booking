@@ -27,6 +27,8 @@ class HotelRoute extends AbstractRouter {
     );
     this.routers.get('/', this.hotelController.getHotels);
     this.routers.get('/:id', this.hotelController.getSingleHotel);
+    this.routers.delete('/:id', this.hotelController.deleteHotel);
+
     this.routers.put(
       '/:id',
       upload.array('imageFiles', 6),

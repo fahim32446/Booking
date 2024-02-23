@@ -42,6 +42,15 @@ class MyHotelModel extends AbstractModels {
     return result;
   }
 
+  async deleteHotel(id: string | number) {
+    const result = await this.query()
+      .delete()
+      .from('hotels')
+      .where({ hotel_id: id });
+
+    return result;
+  }
+
   async updateHotel(id: string | number, data: HotelData) {
     const result = await this.query()
       .update(data)

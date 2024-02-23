@@ -1,8 +1,6 @@
 import { RiLoader2Fill } from 'react-icons/ri';
 
-type Props = {};
-
-const Loading = (props: Props) => {
+const Loading = () => {
   return (
     <div className='bg-transparent p-2 w-full'>
       <div className='flex gap-3 justify-center items-center'>

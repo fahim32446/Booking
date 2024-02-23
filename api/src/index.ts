@@ -7,11 +7,9 @@ import path from 'path';
 import AuthChecker from './common/middlewares/authChecker';
 import ErrorHandler from './common/middlewares/errorHandler';
 import Mini from './common/mini';
-import config from './utils/config';
 import private_routes from './routes/private_routes';
-import { v2 as cloudinary } from 'cloudinary';
-import AuthRoute from './modules/public/auth/auth.route';
 import public_routes from './routes/public_routes';
+import config from './utils/config';
 
 class App {
   public app = express();

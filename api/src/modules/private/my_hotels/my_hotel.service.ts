@@ -75,6 +75,23 @@ class HotelService extends AbstractServices {
     });
   }
 
+  public async deleteHotel(req: Request) {
+    return await this.models.db.transaction(async (trx) => {
+      const hotelID = req.params.id.toString();
+      const hotel_conn = this.models.myHotelModel(req);
+
+      const user_id = req.userId;
+
+      const result = await hotel_conn.deleteHotel(hotelID);
+
+      return {
+        success: true,
+        data: result,
+        message: 'Get single hotel',
+      };
+    });
+  }
+
   public async updateHotel(req: Request) {
     return await this.models.db.transaction(async (trx) => {
       const updatedHotel: IHotelType = req.body;

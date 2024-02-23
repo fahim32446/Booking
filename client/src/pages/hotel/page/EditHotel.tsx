@@ -6,7 +6,6 @@ import {
   useUpdateHotelMutation,
 } from '../api/hotelEndpoint';
 import ManageHotelForm from '../components/ManageHotelForm';
-import { HotelType } from '../utils/hotelType';
 import Loading from '../../../components/Loading';
 
 const EditHotel = () => {
@@ -15,13 +14,6 @@ const EditHotel = () => {
   const { data: hotel, isLoading } = useGetMySingleHotelQuery({ id: hotelId! });
 
   const hotelData = hotel?.data;
-
-  // const image_Urls = JSON.parse(String(hotelData?.imageUrls));
-
-  // const hotelDataWithImage = {
-  //   ...hotelData,
-  //   imageUrls: image_Urls,
-  // } as HotelType;
 
   const [
     updateHotel,
@@ -44,8 +36,6 @@ const EditHotel = () => {
       // navigate(-1);
     }
   }, [isError, updateSuccess]);
-
-  // console.log(hotelDataWithImage);
 
   if (isLoading) {
     return <Loading />;

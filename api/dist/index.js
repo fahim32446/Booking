@@ -12,9 +12,9 @@ const path_1 = __importDefault(require("path"));
 const authChecker_1 = __importDefault(require("./common/middlewares/authChecker"));
 const errorHandler_1 = __importDefault(require("./common/middlewares/errorHandler"));
 const mini_1 = __importDefault(require("./common/mini"));
-const config_1 = __importDefault(require("./utils/config"));
 const private_routes_1 = __importDefault(require("./routes/private_routes"));
 const public_routes_1 = __importDefault(require("./routes/public_routes"));
+const config_1 = __importDefault(require("./utils/config"));
 class App {
     constructor() {
         this.app = (0, express_1.default)();

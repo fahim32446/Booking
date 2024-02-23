@@ -39,6 +39,15 @@ class MyHotelModel extends abstract_models_1.default {
             return result;
         });
     }
+    deleteHotel(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield this.query()
+                .delete()
+                .from('hotels')
+                .where({ hotel_id: id });
+            return result;
+        });
+    }
     updateHotel(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield this.query()

@@ -77,6 +77,21 @@ class HotelService extends abstract_service_1.default {
             }));
         });
     }
+    deleteHotel(req) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.models.db.transaction((trx) => __awaiter(this, void 0, void 0, function* () {
+                const hotelID = req.params.id.toString();
+                const hotel_conn = this.models.myHotelModel(req);
+                const user_id = req.userId;
+                const result = yield hotel_conn.deleteHotel(hotelID);
+                return {
+                    success: true,
+                    data: result,
+                    message: 'Get single hotel',
+                };
+            }));
+        });
+    }
     updateHotel(req) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.models.db.transaction((trx) => __awaiter(this, void 0, void 0, function* () {

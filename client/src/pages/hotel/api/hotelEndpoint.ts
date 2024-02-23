@@ -30,6 +30,17 @@ export const hotelEndpoint = api.injectEndpoints({
       providesTags: () => [hotel],
     }),
 
+    deleteMySingleHotel: build.mutation<
+      HttpResponse<HotelType>,
+      { id: string }
+    >({
+      query: ({ id }) => ({
+        url: `/my-hotel/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: () => [hotel],
+    }),
+
     updateHotel: build.mutation<
       HttpResponse<HotelType>,
       { id: string; body: FormData }
@@ -49,4 +60,5 @@ export const {
   useGetMyHotelsQuery,
   useGetMySingleHotelQuery,
   useUpdateHotelMutation,
+  useDeleteMySingleHotelMutation,
 } = hotelEndpoint;
